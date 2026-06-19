@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xcysy.github.io/portalzh-i-game-com-cn/sitemap.xml
