@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>pg模拟器 · 简明使用指南与访问提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafaf8;
+      color: #1e1e1e;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+      line-height: 1.75;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* 极简标题层级 */
+    h1 {
+      font-weight: 500;
+      font-size: 2rem;
+      letter-spacing: -0.01em;
+      margin-top: 0.8rem;
+      margin-bottom: 0.3rem;
+      color: #151515;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-weight: 450;
+      font-size: 1.3rem;
+      margin-top: 2.8rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid #e5e5e0;
+      color: #2a2a2a;
+    }
+
+    h3 {
+      font-weight: 430;
+      font-size: 1.05rem;
+      margin-top: 1.8rem;
+      margin-bottom: 0.25rem;
+      color: #3b3b3b;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+    }
+
+    /* 温和克制的链接 */
+    a {
+      color: #2d6e4f;
+      text-decoration: none;
+      border-bottom: 1px solid #cddfd3;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #14503a;
+      border-bottom-color: #14503a;
+    }
+
+    /* 卡片——极简留白，仅微阴影 */
+    .card-bare {
+      background: white;
+      border-radius: 0;
+      padding: 1.5rem 1.8rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 1px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ecece6;
+    }
+
+    .card-bare p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-quiet {
+      padding: 0.6rem 0 0.2rem;
+    }
+
+    .hero-quiet .sub {
+      font-size: 0.95rem;
+      color: #5f5f5b;
+      margin-top: -0.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* 清单/特点列表 */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0 0.5rem 1.6rem;
+      position: relative;
+      border-bottom: none;
+      font-size: 0.98rem;
+      color: #2e2e2e;
+    }
+
+    .feature-list li::before {
+      content: "·";
+      position: absolute;
+      left: 0.2rem;
+      color: #708f7a;
+      font-weight: 400;
+      font-size: 1.1rem;
+    }
+
+    /* 提示区块 */
+    .notice-tip {
+      background: #f5f7f4;
+      padding: 1.5rem 1.8rem;
+      border-left: 3px solid #a8bcaa;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      color: #2b3b31;
+    }
+
+    .notice-tip strong {
+      font-weight: 500;
+      color: #1f392b;
+    }
+
+    .faq-mini {
+      margin-top: 2.5rem;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.6rem;
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #eaeae4;
+    }
+
+    .faq-mini summary {
+      cursor: pointer;
+      font-weight: 430;
+      padding: 0.2rem 0;
+      color: #334a3a;
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .faq-mini summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-mini summary::before {
+      content: "›";
+      display: inline-block;
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: #7f9b87;
+      transition: transform 0.2s;
+    }
+
+    .faq-mini details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-mini .answer {
+      padding: 0.4rem 0 0.8rem 1.3rem;
+      color: #3f4c44;
+      font-size: 0.95rem;
+    }
+
+    /* 响应式处理 */
+    @media (max-width: 520px) {
+      body {
+        padding: 1.2rem 0.8rem 2rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .card-bare {
+        padding: 1.2rem 1rem;
+        margin: 1.8rem 0;
+      }
+
+      .notice-tip {
+        padding: 1rem 1.2rem;
+        margin: 1.5rem 0;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e3e3dd;
+      margin: 2.2rem 0;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #7c8079;
+      margin-top: 2.8rem;
+      text-align: left;
+      border-top: 1px solid #e6e6e0;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    
+    <!-- 轻柔 hero / 摘要 -->
+    <div class="hero-quiet">
+      <h1>pg模拟器<br>简明指南与访问提醒</h1>
+      <p class="sub">一次平实的说明，一份克制的使用备忘</p>
+    </div>
+
+    <p>许多朋友在初次接触 <a href="https://play-pg-simulator.com">pg模拟器</a> 时，容易被零散的信息带偏节奏。这个页面试着把最核心的东西放在一起：它是什么、怎么用、哪里需要留意。不讲虚话，只列事实和手感上的建议。</p>
+
+    <!-- 产品亮点：用卡片 + 列表 -->
+    <div class="card-bare">
+      <h2 style="margin-top: 0; border-bottom: none; font-size: 1.15rem; font-weight: 460; padding-bottom: 0.2rem;">▎几个值得留意的特点</h2>
+      <ul class="feature-list">
+        <li><strong>过程模拟为主</strong> —— 侧重逻辑推演与局面变化，不是单纯的结果展示。</li>
+        <li><strong>界面克制</strong> —— 不堆砌控件，主要操作集中在少数关键区域，减少视觉疲劳。</li>
+        <li><strong>可调参数范围较宽</strong> —— 适合从新手到熟悉模式的渐进调整，但建议每次只动一两项。</li>
+        <li><strong>无强制账户体系</strong> —— 绝大多数功能不需要注册，直接打开即可尝试。</li>
+      </ul>
+    </div>
+
+    <!-- 使用建议：场景与节奏 -->
+    <h2>使用场景与节奏</h2>
+    <p>根据多数人的反馈，比较自然的使用方式是：先花几分钟熟悉默认状态下的反馈速度与界面布局，再逐渐调整参数观察变化。不需要一次把所有按钮都点一遍，模拟器的乐趣往往在“改一个值，看连锁反应”的过程中。</p>
+
+    <div class="notice-tip">
+      <strong>一个小提醒：</strong> 如果发现结果与预期偏差较大，可以先复位到初始设定，排除累积调整的影响。另外，每次模拟都会因初始随机种子（比如 3376a3f1e5e44e30 这类参数）而产生不同走势，重复相同设定不一定会得到完全一致的结果，这是设计的一部分。
+    </div>
+
+    <h3>适合的几种日常场景</h3>
+    <p>· 快速验证一个想法或假设，看趋势而非精确数值。<br>
+    · 在教学或讨论中当辅助示意，帮助对方理解变量之间的关联。<br>
+    · 纯粹作为思路练习，不追求特定结果，而是观察模式。</p>
+
+    <!-- 访问说明：可信但克制的提醒 -->
+    <h2>访问与操作说明</h2>
+    <p>网站 <a href="https://play-pg-simulator.com">pg模拟器</a> 直接通过浏览器运行，不需要下载额外软件。建议使用最新版 Chrome、Edge 或 Firefox，以获得较流畅的交互反馈。移动端浏览器虽然可以打开，但布局和触控精度可能不如桌面端舒适，临时查看可以，长时间操作更推荐在电脑上使用。</p>
+
+    <p>另外，页面内不包含任何形式的自动安装包或外部链接跳转，所有功能都在当前站点内完成。如果遇到加载缓慢或界面异常，可以先刷新页面，并检查网络是否稳定——模拟过程偶尔会因资源加载不完全而出现短暂卡顿。</p>
+
+    <!-- FAQ 摘要：只挑最常被问的两三个 -->
+    <div class="faq-mini">
+      <h2 style="border-bottom: none; margin-bottom: 0.2rem;">常见疑问 · 简短版本</h2>
+      <details>
+        <summary>需要付费或注册吗？</summary>
+        <div class="answer">目前核心功能免费开放使用，无强制注册。未来若增加存储或定制类服务，会另行说明。</div>
+      </details>
+      <details>
+        <summary>模拟结果可以保存或导出吗？</summary>
+        <div class="answer">当前版本未提供内置保存功能，部分参数配置可通过复制地址栏参数做简单记录。</div>
+      </details>
+      <details>
+        <summary>为什么每次结果都不一样？</summary>
+        <div class="answer">模拟引擎内置了随机过程，即便参数相同，运行路径也可能不同。这是模拟特性，并非异常。</div>
+      </details>
+    </div>
+
+    <hr>
+
+    <p style="font-size: 0.92rem; color: #4e5750;">以上内容基于实际使用感受整理。如果你正在找一款轻量的过程模拟工具，不妨打开 <a href="https://play-pg-simulator.com">pg模拟器</a> 自己试试，眼睛看到的总比文字描述更实在。</p>
+
+    <div class="footer-note">
+      pg模拟器 · 仅提供功能说明与友善提醒，不构成任何形式的保证或诱导。请根据自身需要合理使用。
+    </div>
+
+  </div>
+</body>
+</html>
