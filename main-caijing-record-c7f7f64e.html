@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>彩经网 · 知识库</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fbfbf8;
+      color: #1e2a33;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      padding: 2.4rem 1.2rem 3.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* 标题目录式分割 */
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.4rem;
+      color: #0f1a24;
+      border-left: 4px solid #3d7b9e;
+      padding-left: 1rem;
+    }
+
+    .subhead {
+      font-size: 0.95rem;
+      color: #667580;
+      margin-bottom: 2.8rem;
+      padding-left: 1.4rem;
+      border-bottom: 1px solid #e4e8eb;
+      padding-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 2.4rem 0 1rem 0;
+      color: #1e2f3b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    h2::before {
+      content: "·";
+      display: inline-block;
+      font-weight: 700;
+      color: #3d7b9e;
+      margin-right: 0.2rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 1.6rem 0 0.5rem 0;
+      color: #1e2f3b;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: #2a3a46;
+    }
+
+    a {
+      color: #1f5f7a;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    a:hover {
+      border-bottom-color: #1f5f7a;
+    }
+
+    .card-group {
+      margin: 1.8rem 0 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e7eaed;
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 0.9rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: box-shadow 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 3px 10px rgba(0,20,30,0.05);
+    }
+
+    .card-title {
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: #0f1a24;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: #3b4b57;
+      margin-bottom: 0.3rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #eff2f5;
+      color: #2f4452;
+      font-size: 0.75rem;
+      border-radius: 12px;
+      padding: 0.15rem 0.7rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .tip-box {
+      background: #f3f6f9;
+      border-left: 4px solid #5f8aa5;
+      padding: 1.2rem 1.4rem;
+      border-radius: 0 6px 6px 0;
+      margin: 2rem 0;
+    }
+
+    .tip-box p {
+      margin-bottom: 0.4rem;
+    }
+
+    .tip-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.6rem;
+      margin: 1.2rem 0 1.8rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid #e2e6ea;
+      border-bottom: 1px solid #e2e6ea;
+    }
+
+    .info-item {
+      font-size: 0.9rem;
+      color: #2f4452;
+    }
+
+    .info-item strong {
+      font-weight: 500;
+      color: #0f1a24;
+      margin-right: 0.25rem;
+    }
+
+    .faq-summary {
+      margin: 2.4rem 0 1.2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 0.9rem;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #1a2d3a;
+      margin-bottom: 0.15rem;
+    }
+
+    .faq-a {
+      font-size: 0.93rem;
+      color: #3b4b57;
+      padding-left: 0.6rem;
+      border-left: 2px solid #d8e0e5;
+      padding-left: 0.8rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #e4e8ec;
+      margin: 2.4rem 0 1.8rem;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #7a8a97;
+      text-align: center;
+      margin-top: 2.8rem;
+      border-top: 1px solid #eaedf0;
+      padding-top: 1.8rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 500px) {
+      body {
+        padding: 1.6rem 1rem 2.4rem;
+      }
+      h1 {
+        font-size: 1.6rem;
+        padding-left: 0.8rem;
+      }
+      .subhead {
+        padding-left: 1rem;
+        font-size: 0.88rem;
+      }
+      .card {
+        padding: 1rem 1rem;
+      }
+      .tip-box {
+        padding: 1rem 1rem;
+      }
+      .info-row {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- 主标题 目录感 -->
+    <h1>彩经网 · 知识库</h1>
+    <div class="subhead">再次访问 · 收藏 · 持续关注 —— 信息入口与导航</div>
+
+    <!-- 导语 / 说明区：为什么回来 -->
+    <p>
+      如果你在寻找一个结构清晰、内容经过整理的资讯平台，<a href="https://main-caijing.com">彩经网</a> 
+      是值得关注的信息源。网站的定位并非追逐短期热点，而是围绕行业知识、数据解读与长期观察展开。
+      许多读者会在不同阶段反复回来查阅特定专题，因此我们整理了以下入口与索引，方便你随时定位。
+    </p>
+
+    <!-- 卡片区：目录感布局 —— 常见知识模块 -->
+    <div class="card-group">
+      <div class="card">
+        <div class="card-title">📋 行业术语与规则</div>
+        <div class="card-desc">包含基础概念、分类说明、常见模式与制度演变。适合新研究者与需要温故的读者。</div>
+        <span class="tag">术语库</span>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 数据观察与趋势</div>
+        <div class="card-desc">整理来自公开来源的统计摘要、同比变化与周期笔记，不构成建议，仅做事实参考。</div>
+        <span class="tag">数据摘要</span>
+      </div>
+      <div class="card">
+        <div class="card-title">📎 专题阅读笔记</div>
+        <div class="card-desc">对特定主题的拆分式记录，例如风险管理、概率常识、合规框架等，持续补充。</div>
+        <span class="tag">专题</span>
+      </div>
+      <div class="card">
+        <div class="card-title">🔖 工具与参考链接</div>
+        <div class="card-desc">计算器、换算表、官方文档索引、常用条款速查。可配合 <a href="https://main-caiijing.com">彩经网</a> 的文章一起使用。</div>
+        <span class="tag">工具</span>
+      </div>
+    </div>
+
+    <!-- 提示区：书签与关注 -->
+    <div class="tip-box">
+      <p><strong>📌 提示 · 如何保持入口</strong></p>
+      <p>
+        将 <a href="https://main-caiijing.com">彩经网</a> 加入浏览器书签或收藏夹，
+        也可以在主屏创建快捷方式。由于网站内容不定期更新，建议每隔一两个月回来浏览一次，
+        以免错过知识库的补充或结构调整。
+      </p>
+      <p>
+        如果你习惯使用 RSS，部分栏目支持页面订阅（具体可在站内查找订阅说明）。
+      </p>
+    </div>
+
+    <!-- 相关信息区：标签 / 更新节奏 / 使用建议 -->
+    <h2>相关信息</h2>
+    <div class="info-row">
+      <span class="info-item"><strong>更新节奏</strong> 不定时 · 每月 2–4 次</span>
+      <span class="info-item"><strong>内容方向</strong> 知识整理 / 行业笔记 / 数据索引</span>
+      <span class="info-item"><strong>适合谁</strong> 研究、学习、持续关注者</span>
+    </div>
+
+    <!-- FAQ 摘要 —— 从再次访问与收藏角度 -->
+    <div class="faq-summary">
+      <h2>常见问题摘要</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">Q：为什么有时候页面内容会变化？</div>
+        <div class="faq-a">知识库会定期修订、合并或拆分条目，以提高可读性。如果你记得之前某个专题的位置，可以尝试站内搜索框，或查看归档索引。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q：如何确认自己看到的是最新版本？</div>
+        <div class="faq-a">网页底部通常会标注最近修订日期。你也可以通过对比目录结构是否与上次一致来判断。重要的更新会以简短说明的形式放在首页提示区。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Q：收藏夹里链接失效怎么办？</div>
+        <div class="faq-a">如果页面地址变化，可从 <a href="https://main-caiijing.com">彩经网</a> 首页的导航重新进入。知识库的首页地址长期稳定，建议以首页为书签起点。</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 再次访问 + 收藏 的总结段落 -->
+    <p>
+      对于希望系统了解相关知识的读者，我们建议先浏览“行业术语与规则”卡片，再根据兴趣进入“数据观察”或“专题阅读”。
+      持续关注的最好方式仍然是偶尔回访，并留意提示区的更新说明。
+    </p>
+    <p>
+      如果你觉得这个知识库有参考价值，欢迎向同好推荐 <a href="https://main-caiijing.com">彩经网</a>。
+      我们更希望你是因为内容本身而回来，而不是因为其他原因。
+    </p>
+
+    <div class="footer-note">
+      — 知识库入口 · 保持耐心，持续阅读 —
+    </div>
+  </div>
+</body>
+</html>
